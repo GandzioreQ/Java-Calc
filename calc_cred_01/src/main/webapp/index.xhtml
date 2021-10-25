@@ -3,27 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+	
 <h:head>
 	<title>Credit Calculator</title>
 </h:head>
 <h:body>
 
-	<h1>Prosty kalkulator kredytowy</h1>
+	<p:panel header="Prosty kalkulator kredytowy" style="margin: 1em auto;">
 
-	<h:form>
-  		Kwota: <h:inputText value="#{creditBB.amount}" />
-		<br />
-  		Lata: <h:inputText value="#{creditBB.period}" />
-		<br />
-		Oprocentowanie: <h:inputText value ="#{creditBB.rate}" />
-		<br />
-		<h:messages id="msg" />
-		
+	<h:form id="calc">
+	
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+			<p:outputLabel for = "amount" value="Kwota:" />
+			<p:inputText id="amount" value="#{creditBB.amount}" required="true" requiredMessage="Nie podano kwoty kredytu" />
+	  		<p:message for="amount" />
+	  		
+	  		<p:outputLabel for = "period" value="Lata:" />
+			<p:inputText id="period" value="#{creditBB.period}" required="true" requiredMessage="Nie podano lat spłaty" />
+	  		<p:message for="period" />
+	  		
+			<p:outputLabel for = "rate" value="Oprocentowanie:" />
+			<p:inputText id="rate" value ="#{creditBB.rate}" required="true" requiredMessage="Nie podano oprocentowania" />
+	  		<p:message for="rate" />
+	  		
+			<p:commandButton value="Oblicz ratę" action="#{creditBB.countRate()}" update="@form"/>
+		</h:panelGrid>
 		<p>Opłata wynosi: #{creditBB.result} zł.</p>
-		<h:commandButton value="Oblicz ratę" action="#{creditBB.countRate()}"/>
-
+		<p:messages id="msg" />
+		
 	</h:form>
-
+	
+	</p:panel>
 </h:body>
 </html>
