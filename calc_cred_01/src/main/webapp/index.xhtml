@@ -17,15 +17,30 @@
 	
 		<h:panelGrid id="grid" columns="3" cellpadding="5">
 			<p:outputLabel for = "amount" value="Kwota:" />
-			<p:inputText id="amount" value="#{creditBB.amount}" required="true" requiredMessage="Nie podano kwoty kredytu" />
+			<p:inputText id="amount" value="#{creditBB.amount}" required="true" 
+				requiredMessage="Nie podano kwoty kredytu" 
+				converterMessage="Kwota musi być wartością liczbową"
+				validatorMessage="Minimalna kwota kredytu to 1000zł">
+				<f:validateDoubleRange minimum="1000"/>
+			</p:inputText>
 	  		<p:message for="amount" />
 	  		
 	  		<p:outputLabel for = "period" value="Lata:" />
-			<p:inputText id="period" value="#{creditBB.period}" required="true" requiredMessage="Nie podano lat spłaty" />
+			<p:inputText id="period" value="#{creditBB.period}" required="true" 
+				requiredMessage="Nie podano lat spłaty"
+				converterMessage="Lata muszą być wartością liczbową"
+				validatorMessage="Minimalny okres spłaty kredytu to 2 lata">
+				<f:validateDoubleRange minimum="2"/>
+			</p:inputText>	
 	  		<p:message for="period" />
 	  		
 			<p:outputLabel for = "rate" value="Oprocentowanie:" />
-			<p:inputText id="rate" value ="#{creditBB.rate}" required="true" requiredMessage="Nie podano oprocentowania" />
+			<p:inputText id="rate" value ="#{creditBB.rate}" required="true" 
+				requiredMessage="Nie podano oprocentowania"
+			 	converterMessage="Oprocentowanie musi być wartością liczbową"
+			 	validatorMessage="Minimalne oprocentowanie kredytu to 2%">
+			 	<f:validateDoubleRange minimum="2"/>
+			</p:inputText>
 	  		<p:message for="rate" />
 	  		
 			<p:commandButton value="Oblicz ratę" action="#{creditBB.countRate()}" update="@form"/>
