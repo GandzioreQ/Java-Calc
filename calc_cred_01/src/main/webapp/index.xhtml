@@ -1,55 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui" >
+	xmlns:p="http://primefaces.org/ui">
 	
-<h:head>
-	<title>Credit Calculator</title>
-</h:head>
-<h:body>
+	<ui:composition template="/templates/main-template.xhtml">
 
-	<p:panel header="Prosty kalkulator kredytowy" style="margin: 1em auto;">
-
-	<h:form id="calc">
-	
-		<h:panelGrid id="grid" columns="3" cellpadding="5">
-			<p:outputLabel for = "amount" value="Kwota:" />
-			<p:inputText id="amount" value="#{creditBB.amount}" required="true" 
-				requiredMessage="Nie podano kwoty kredytu" 
-				converterMessage="Kwota musi być wartością liczbową"
-				validatorMessage="Minimalna kwota kredytu to 1000zł">
-				<f:validateDoubleRange minimum="1000"/>
-			</p:inputText>
-	  		<p:message for="amount" />
-	  		
-	  		<p:outputLabel for = "period" value="Lata:" />
-			<p:inputText id="period" value="#{creditBB.period}" required="true" 
-				requiredMessage="Nie podano lat spłaty"
-				converterMessage="Lata muszą być wartością liczbową"
-				validatorMessage="Minimalny okres spłaty kredytu to 2 lata">
-				<f:validateDoubleRange minimum="2"/>
-			</p:inputText>	
-	  		<p:message for="period" />
-	  		
-			<p:outputLabel for = "rate" value="Oprocentowanie:" />
-			<p:inputText id="rate" value ="#{creditBB.rate}" required="true" 
-				requiredMessage="Nie podano oprocentowania"
-			 	converterMessage="Oprocentowanie musi być wartością liczbową"
-			 	validatorMessage="Minimalne oprocentowanie kredytu to 2%">
-			 	<f:validateDoubleRange minimum="2"/>
-			</p:inputText>
-	  		<p:message for="rate" />
-	  		
-			<p:commandButton value="Oblicz ratę" action="#{creditBB.countRate()}" update="@form"/>
-		</h:panelGrid>
-		<p>Opłata wynosi: #{creditBB.result} zł.</p>
-		<p:messages id="msg" />
+		<ui:define name="title">Credit Calculator</ui:define>
 		
-	</h:form>
-	
-	</p:panel>
-</h:body>
+		<ui:define name="pageContent">
+			<p:panel class="panel" header="Prosty kalkulator kredytowy" >
+		
+			<h:form id="calc">		
+				<h:panelGrid id="grid" columns="3" cellpadding="5">
+					<p:outputLabel for = "amount" value="Kwota:" />
+					<p:inputText id="amount" value="#{creditBB.amount}" required="true" 
+						requiredMessage="Nie podano kwoty kredytu" 
+						converterMessage="Kwota musi być wartością liczbową"
+						validatorMessage="Minimalna kwota kredytu to 1000zł">
+						<f:validateDoubleRange minimum="1000"/>
+					</p:inputText>
+			  		<p:message for="amount" />
+			  		
+			  		<p:outputLabel for = "period" value="Lata:" />
+					<p:inputText id="period" value="#{creditBB.period}" required="true" 
+						requiredMessage="Nie podano lat spłaty"
+						converterMessage="Lata muszą być wartością liczbową"
+						validatorMessage="Minimalny okres spłaty kredytu to 2 lata">
+						<f:validateDoubleRange minimum="2"/>
+					</p:inputText>	
+			  		<p:message for="period" />
+			  		
+					<p:outputLabel for = "rate" value="Oprocentowanie:" />
+					<p:inputText id="rate" value ="#{creditBB.rate}" required="true" 
+						requiredMessage="Nie podano oprocentowania"
+					 	converterMessage="Oprocentowanie musi być wartością liczbową"
+					 	validatorMessage="Minimalne oprocentowanie kredytu to 2%">
+					 	<f:validateDoubleRange minimum="2"/>
+					</p:inputText>
+			  		<p:message for="rate" />
+			  		
+					<p:commandButton value="Oblicz ratę" action="#{creditBB.countRate()}" update="@form"/>
+				</h:panelGrid>
+				<p>Opłata wynosi: #{creditBB.result} zł.</p>
+				<p:messages id="msg" />
+				
+			</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
 </html>

@@ -1,0 +1,10 @@
+body{
+	background-color: rgb(120,120,120);
+}
+.title{
+	text-align:center;
+}
+
+.panel{
+margin: 2em 40em;
+}
